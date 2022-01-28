@@ -12,13 +12,17 @@
   "author": "Douglas Brum",
   "license": "ISC",
   "dependencies": {
-    "express": "^4.17.2"
+    "dotenv": "^14.3.2",
+    "express": "^4.17.2",
+    "mariadb": "^2.5.5",
+    "sequelize": "^6.14.1"
   },
   "devDependencies": {
     "eslint": "^8.7.0",
     "eslint-config-airbnb-base": "^15.0.0",
     "eslint-plugin-import": "^2.25.4",
     "nodemon": "^2.0.15",
+    "sequelize-cli": "^6.4.1",
     "sucrase": "^3.20.3"
   }
 }

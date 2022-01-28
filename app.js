@@ -1,3 +1,8 @@
+import dotenv from 'dotenv'; // eslint-disable-line
+dotenv.config();
+
+import './src/database';
+
 import express from 'express';
 import homeRoutes from './src/routes/home';
 
