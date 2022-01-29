@@ -1,10 +1,7 @@
-import dotenv from 'dotenv'; // eslint-disable-line
-dotenv.config();
+require('dotenv').config();
 
-import './src/database';
-
-import express from 'express';
-import homeRoutes from './src/routes/home';
+const express = require('express');
+const homeRoutes = require('./src/routes/home');
 
 class App {
   constructor() {
@@ -23,4 +20,4 @@ class App {
   }
 }
 
-export default new App().app;
+module.exports = new App().app;

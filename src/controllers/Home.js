@@ -1,9 +1,9 @@
-import Student from '../models/Student';
+const db = require('../models');
 
 class HomeController {
   async index(req, res) {
     try {
-      const newStudent = await Student.create({
+      const newStudent = await db.Student.create({
         firstName: 'Miranda',
         lastName: 'Souza',
         email: 'mirandinha2000@gmail.com',
@@ -21,4 +21,4 @@ class HomeController {
   }
 }
 
-export default new HomeController();
+module.exports = new HomeController();

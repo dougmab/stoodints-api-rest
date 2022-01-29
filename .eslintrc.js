@@ -1,6 +1,7 @@
 module.exports = {
   env: {
     node: true,
+    commonjs: true,
     es2021: true,
   },
   extends: [
@@ -8,7 +9,6 @@ module.exports = {
   ],
   parserOptions: {
     ecmaVersion: 'latest',
-    sourceType: 'module',
   },
   rules: {
     'no-console': 'off',
