@@ -1,23 +1,18 @@
-import Sequelize, { Model } from 'sequelize';
+const { Model } = require('sequelize');
 
-export default class Student extends Model {
-  static init(sequelize) {
-    try {
-      super.init({
-        firstName: Sequelize.STRING,
-        lastName: Sequelize.STRING,
-        email: Sequelize.STRING,
-        age: Sequelize.INTEGER,
-        weight: Sequelize.FLOAT,
-        height: Sequelize.FLOAT,
-      }, {
-        sequelize,
-      });
-      return this;
-    } catch (e) {
-      return {
-        error: e.message,
-      };
-    }
-  }
-}
+module.exports = (sequelize, DataTypes) => {
+  class Student extends Model {}
+
+  Student.init({
+    firstName: DataTypes.STRING,
+    lastName: DataTypes.STRING,
+    email: DataTypes.STRING,
+    age: DataTypes.INTEGER,
+    weight: DataTypes.FLOAT,
+    height: DataTypes.FLOAT,
+  }, {
+    sequelize,
+    modelName: 'Student',
+  });
+  return Student;
+};

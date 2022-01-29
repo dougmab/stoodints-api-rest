@@ -1,21 +1,40 @@
 require('dotenv').config();
 
 module.exports = {
-  dialect: 'mariadb',
-  database: process.env.DATABASE,
-  host: process.env.DATABASE_HOST,
-  port: process.env.DATABASE_PORT,
-  username: process.env.DATABASE_USERNAME,
-  password: process.env.DATABASE_PASSWORD,
-  define: {
-    timestamps: true,
-    underscored: true,
-    underscoredAll: true,
-    createdAt: 'created_at',
-    updatedAt: 'updated_at',
+  development: {
+    username: process.env.DB_USERNAME,
+    password: process.env.DB_PASSWORD,
+    database: process.env.DB,
+    host: process.env.DB_HOST,
+    dialect: 'mariadb',
+    define: {
+      timestamps: true,
+      underscored: true,
+      underscoredAll: true,
+    },
   },
-  dialectOptions: {
-    timezone: 'America/Sao_Paulo',
+  test: {
+    username: process.env.DB_USERNAME,
+    password: process.env.DB_PASSWORD,
+    database: process.env.DB,
+    host: process.env.DB_HOST,
+    dialect: 'mariadb',
+    define: {
+      timestamps: true,
+      underscored: true,
+      underscoredAll: true,
+    },
   },
-  timezone: 'America/Sao_Paulo',
+  production: {
+    username: process.env.DB_USERNAME,
+    password: process.env.DB_PASSWORD,
+    database: process.env.DB,
+    host: process.env.DB_HOST,
+    dialect: 'mariadb',
+    define: {
+      timestamps: true,
+      underscored: true,
+      underscoredAll: true,
+    },
+  },
 };

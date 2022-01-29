@@ -14,5 +14,7 @@ module.exports = {
     'no-console': 'off',
     'class-methods-use-this': 'off',
     'import/first': 'off',
+    'import/no-dynamic-require': 'off',
+    'global-require': 'off',
   },
 };

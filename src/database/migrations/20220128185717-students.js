@@ -3,9 +3,9 @@ module.exports = {
     await queryInterface.createTable('students', {
       id: {
         type: Sequelize.INTEGER,
-        allowNull: false,
         autoIncrement: true,
         primaryKey: true,
+        allowNull: false,
       },
       first_name: {
         type: Sequelize.STRING,
