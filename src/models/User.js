@@ -12,7 +12,6 @@ module.exports = (sequelize, DataTypes) => {
         len: {
           args: [4, 20],
           msg: 'Username must be between 3 and 20 characters.',
-
         },
       },
     },
