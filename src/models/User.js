@@ -47,7 +47,9 @@ module.exports = (sequelize, DataTypes) => {
     modelName: 'User',
   });
   User.addHook('beforeSave', async (user) => {
-    user.password_hash = await bcrypt.hash(user.password, 8);
+    if (user.password) {
+      user.password_hash = await bcrypt.hash(user.password, 8);
+    }
   });
   return User;
 };
