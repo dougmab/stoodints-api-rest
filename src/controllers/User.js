@@ -11,6 +11,20 @@ class UserController {
     }
   }
 
+  async show(req, res) {
+    try {
+      const user = await User.findByPk(req.params.id);
+
+      return res.json(user);
+    } catch (e) {
+      return res.status(500).send({
+        errors: [
+          'Something went wrong with the database.',
+        ],
+      });
+    }
+  }
+
   async store(req, res) {
     try {
       const newUser = await User.create(req.body);
