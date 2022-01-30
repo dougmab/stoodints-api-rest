@@ -64,6 +64,31 @@ class UserController {
       });
     }
   }
+
+  async delete(req, res) {
+    try {
+      if (!req.params.id) {
+        return res.status(400).json({
+          errors: ['Missing ID.'],
+        });
+      }
+
+      const user = await User.findByPk(req.params.id);
+      if (!user) {
+        return res.status(400).json({
+          errors: ['User does not exist.'],
+        });
+      }
+
+      await user.destroy();
+
+      return res.json(user);
+    } catch (e) {
+      return res.status(500).send({
+        errors: ['Something went wrong with the database.'],
+      });
+    }
+  }
 }
 
 module.exports = new UserController();
