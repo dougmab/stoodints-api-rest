@@ -17,5 +17,6 @@ module.exports = {
     'import/no-dynamic-require': 'off',
     'global-require': 'off',
     'no-param-reassign': 'off',
+    'consistent-return': 'off',
   },
 };
