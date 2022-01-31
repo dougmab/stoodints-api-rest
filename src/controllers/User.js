@@ -3,7 +3,7 @@ const { User } = require('../models');
 class UserController {
   async index(req, res) {
     try {
-      const users = await User.findAll();
+      const users = await User.findAll({ attributes: ['id', 'username', 'email'] });
 
       return res.json(users);
     } catch (e) {
@@ -13,7 +13,7 @@ class UserController {
 
   async show(req, res) {
     try {
-      const user = await User.findByPk(req.params.id);
+      const user = await User.findByPk(req.params.id, { attributes: ['id', 'username', 'email'] });
 
       return res.json(user);
     } catch (e) {
