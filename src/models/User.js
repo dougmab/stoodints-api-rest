@@ -2,7 +2,9 @@ const { Model } = require('sequelize');
 const bcrypt = require('bcryptjs');
 
 module.exports = (sequelize, DataTypes) => {
-  class User extends Model {}
+  class User extends Model {
+    isPasswordValid = (password) => bcrypt.compare(password, this.password_hash);
+  }
 
   User.init({
     username: {
@@ -46,10 +48,12 @@ module.exports = (sequelize, DataTypes) => {
     sequelize,
     modelName: 'User',
   });
+
   User.addHook('beforeSave', async (user) => {
     if (user.password) {
       user.password_hash = await bcrypt.hash(user.password, 8);
     }
   });
+
   return User;
 };
