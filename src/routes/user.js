@@ -4,8 +4,10 @@ const userController = require('../controllers/User');
 
 const router = new Router();
 
-router.get('/', loginReq, userController.index);
-router.get('/:id', userController.show);
+if (!process.env.NODE_ENV || process.env.NODE_ENV === 'development') {
+  router.get('/', loginReq, userController.index);
+  router.get('/:id', userController.show);
+}
 
 router.post('/', userController.store);
 
