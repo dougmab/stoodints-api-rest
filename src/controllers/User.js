@@ -27,7 +27,9 @@ class UserController {
     try {
       const newUser = await User.create(req.body);
 
-      return res.status(200).json(newUser);
+      const { id, username, email } = newUser;
+
+      return res.status(200).json({ id, username, email });
     } catch (e) {
       const sqlErrors = e.errors.map((error) => error.message);
 
@@ -39,13 +41,7 @@ class UserController {
 
   async update(req, res) {
     try {
-      if (!req.params.id) {
-        return res.status(400).json({
-          errors: ['Missing ID.'],
-        });
-      }
-
-      const user = await User.findByPk(req.params.id);
+      const user = await User.findByPk(req.userId);
       if (!user) {
         return res.status(400).json({
           errors: ['User does not exist.'],
@@ -53,8 +49,9 @@ class UserController {
       }
 
       const updatedUser = await user.update(req.body);
+      const { id, username, email } = updatedUser;
 
-      return res.json(updatedUser);
+      return res.json({ id, username, email });
     } catch (e) {
       const sqlErrors = e.errors.map((error) => error.message);
       if (!sqlErrors[0]) sqlErrors.push('Something went wrong with the database.');
@@ -67,13 +64,7 @@ class UserController {
 
   async delete(req, res) {
     try {
-      if (!req.params.id) {
-        return res.status(400).json({
-          errors: ['Missing ID.'],
-        });
-      }
-
-      const user = await User.findByPk(req.params.id);
+      const user = await User.findByPk(req.userId);
       if (!user) {
         return res.status(400).json({
           errors: ['User does not exist.'],
@@ -82,7 +73,9 @@ class UserController {
 
       await user.destroy();
 
-      return res.json(user);
+      const { id, username, email } = user;
+
+      return res.json({ id, username, email });
     } catch (e) {
       return res.status(500).send({
         errors: ['Something went wrong with the database.'],
