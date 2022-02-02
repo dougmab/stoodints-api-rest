@@ -17,6 +17,7 @@ class App {
 
   routes() {
     this.app.use('/', routes.home);
+    this.app.use('/students/', routes.student);
     this.app.use('/users/', routes.user);
     this.app.use('/tokens/', routes.token);
   }
