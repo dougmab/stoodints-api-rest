@@ -11,6 +11,13 @@ if (!existsSync(uploadDir)) {
 }
 
 module.exports = {
+  fileFilter: (req, file, cb) => {
+    if (file.mimetype !== 'image/png' && file.mimetype !== 'image/jpeg') {
+      return cb(new multer.MulterError('File type not authorized, must be PNG or JPG/JPEG.'));
+    }
+
+    return cb(null, true);
+  },
   storage: multer.diskStorage({
     destination: (req, file, cb) => {
       cb(null, uploadDir);
