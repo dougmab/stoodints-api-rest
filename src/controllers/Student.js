@@ -2,7 +2,10 @@ const { Student } = require('../models');
 
 class StudentController {
   async index(req, res) {
-    const students = await Student.findAll();
+    const students = await Student.findAll({
+      attributes: ['id', 'firstName', 'lastName', 'email', 'age', 'weight', 'height'],
+    });
+
     res.status(200).json(students);
   }
 
@@ -12,7 +15,13 @@ class StudentController {
 
       const student = await Student.findByPk(id);
 
-      res.status(200).json(student);
+      const {
+        firstName, lastName, email, age, weight, height,
+      } = student;
+
+      res.status(200).json({
+        id, firstName, lastName, email, age, weight, height,
+      });
     } catch (e) {
       res.status(500).json({ errors: ['Something went wrong with the database.'] });
     }
@@ -22,7 +31,13 @@ class StudentController {
     try {
       const newStudent = await Student.create(req.body);
 
-      res.status(200).json(newStudent);
+      const {
+        id, firstName, lastName, email, age, weight, height,
+      } = newStudent;
+
+      res.status(200).json({
+        id, firstName, lastName, email, age, weight, height,
+      });
     } catch (e) {
       const sqlErrors = e.errors.map((err) => err.message);
       if (!sqlErrors[0]) sqlErrors.push('Something went wrong with the database.');
@@ -39,7 +54,13 @@ class StudentController {
 
       const updatedStudent = await student.update(req.body);
 
-      res.status(200).json(updatedStudent);
+      const {
+        firstName, lastName, email, age, weight, height,
+      } = updatedStudent;
+
+      res.status(200).json({
+        id, firstName, lastName, email, age, weight, height,
+      });
     } catch (e) {
       const sqlErrors = e.errors.map((err) => err.message);
       if (!sqlErrors[0]) sqlErrors.push('Something went wrong with the database.');
@@ -55,7 +76,14 @@ class StudentController {
       const student = await Student.findByPk(id);
 
       await student.destroy();
-      res.status(200).json(student);
+
+      const {
+        firstName, lastName, email, age, weight, height,
+      } = student;
+
+      res.status(200).json({
+        id, firstName, lastName, email, age, weight, height,
+      });
     } catch (e) {
       res.status(500).json({ errors: ['Something went wrong with the database.'] });
     }
