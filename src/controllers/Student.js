@@ -1,9 +1,14 @@
-const { Student } = require('../models');
+const { Student, Photo } = require('../models');
 
 class StudentController {
   async index(req, res) {
     const students = await Student.findAll({
       attributes: ['id', 'firstName', 'lastName', 'email', 'age', 'weight', 'height'],
+      order: [['id', 'DESC'], [Photo, 'id', 'DESC']],
+      include: {
+        model: Photo,
+        attributes: ['filename'],
+      },
     });
 
     res.status(200).json(students);
@@ -13,15 +18,16 @@ class StudentController {
     try {
       const { id } = req.params;
 
-      const student = await Student.findByPk(id);
-
-      const {
-        firstName, lastName, email, age, weight, height,
-      } = student;
-
-      res.status(200).json({
-        id, firstName, lastName, email, age, weight, height,
+      const student = await Student.findByPk(id, {
+        attributes: ['id', 'firstName', 'lastName', 'email', 'age', 'weight', 'height'],
+        order: [['id', 'DESC'], [Photo, 'id', 'DESC']],
+        include: {
+          model: Photo,
+          attributes: ['filename'],
+        },
       });
+
+      res.status(200).json(student);
     } catch (e) {
       res.status(500).json({ errors: ['Something went wrong with the database.'] });
     }
