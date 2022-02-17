@@ -4,8 +4,8 @@ const loginReq = require('../middlewares/loginRequired');
 
 const router = new Router();
 
-router.get('/', studentController.index);
-router.get('/:id', studentController.show);
+router.get('/', loginReq, studentController.index);
+router.get('/:id', loginReq, studentController.show);
 
 router.post('/', loginReq, studentController.store);
 
