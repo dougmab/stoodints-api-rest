@@ -1,6 +1,7 @@
 require('dotenv').config();
 
 const express = require('express');
+const { resolve } = require('path');
 const routes = require('./src/routes');
 
 class App {
@@ -13,6 +14,7 @@ class App {
   middlewares() {
     this.app.use(express.urlencoded({ extended: true }));
     this.app.use(express.json());
+    this.app.use(express.static(resolve(__dirname, 'uploads')));
   }
 
   routes() {

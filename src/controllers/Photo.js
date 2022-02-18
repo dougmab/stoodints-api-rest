@@ -20,6 +20,7 @@ class PhotoController {
 
         return res.json(photo);
       } catch (error) {
+        console.log(error);
         return res.status(400).json({
           errors: ['Student does not exist.'],
         });

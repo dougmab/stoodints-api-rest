@@ -1,4 +1,5 @@
 const { Model } = require('sequelize');
+const { url: apiUrl } = require('../config/appConfig');
 
 module.exports = (sequelize, DataTypes) => {
   class User extends Model {
@@ -24,6 +25,12 @@ module.exports = (sequelize, DataTypes) => {
         notEmpty: {
           msg: 'Field must not be empty.',
         },
+      },
+    },
+    url: {
+      type: DataTypes.VIRTUAL,
+      get() {
+        return `${apiUrl}/images/${this.getDataValue('filename')}`;
       },
     },
   }, {

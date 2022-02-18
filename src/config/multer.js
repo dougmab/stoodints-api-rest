@@ -4,7 +4,7 @@ const { existsSync, mkdirSync } = require('fs');
 
 const random = () => Math.floor(Math.random() * 10000 + 10000);
 
-const uploadDir = resolve(__dirname, '..', '..', 'uploads');
+const uploadDir = resolve(__dirname, '..', '..', 'uploads', 'images');
 
 if (!existsSync(uploadDir)) {
   mkdirSync(uploadDir);
